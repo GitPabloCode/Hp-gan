@@ -1,0 +1,17 @@
+GENERATORE
+
+- Prendere minibatch 
+- Generare rumore z (vettore di dimensione 128 generato da una gaussiana oppure una uniforme)
+
+Modello
+
+- Dare in pasto al generatore sequence to sequence le prior poses e il rumore z da cui ottengo le fake pose sequence
+- Le prior poses e le future poses sono concatenate per formare la real pose sequence
+- Sia le fps che le rps sono date in pasto al critic WGAN-GP e al discrimiantor GAN che ne calolano le rispettive loss 
+- WGAN-GP e loss è usata per migliorare sia la critic network che il generator network 
+- GAN loss è usata per migliorare solo la discrimiantor network
+
+Caratteristiche
+
+- La critic network è una fully connected a 3 layer che sputa un singolo valore usato per la WGAN-GP loss 
+-La discrimiantor network è una fully connected a 3 layer che sputa un singolo valore tra 0 e 1 (1 = sequenza reale, 0=sequenza fake) 
